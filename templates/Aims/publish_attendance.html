@@ -1,0 +1,61 @@
+{% extends 'Aims/profile.html' %}
+{% load staticfiles %}
+
+{% block upper %}
+
+<h2>Attendance Marking Portal</h2>
+
+<form action="{% url 'publish_attendance' %}" method="post">
+  {% csrf_token %}
+  Date : <input type="date" name="date" value="">
+  <br />
+  <br />
+  <table class="table">
+    <thead>
+      <tr><th>Student Name</th>
+        <th>Status</th></tr>
+    </thead>
+    <tbody>
+
+        {% for s in students %}
+        <tr>
+        <td><br />{{s.user.first_name}}</td>
+        <td>
+          <table class="table">
+            <tr>
+              <td>
+                <fieldset id="{{s.user.username}}">
+                  Present : <input type="radio" value="present" name="{{s.user.first_name}}{{s.user.username}}">
+
+                </fieldset>
+              </td>
+              <td>
+                <fieldset id="{{s.user.username}}">
+                  Absent : <input type="radio" value="absent" name="{{s.user.first_name}}{{s.user.username}}">
+
+                </fieldset>
+
+              </td>
+            </tr>
+          </table>
+
+
+        </td>
+        </tr>
+        {% endfor %}
+
+    </tbody>
+  </table>
+  <br />
+  <br />
+  <p style="color:red;">
+    Warning : Please carefully verify the form once again before hitting the Submit button.
+  </p>
+  <input type="submit" name="next" value="submit">
+</form>
+
+{% endblock %}
+
+{% block lower %}
+
+{% endblock %}

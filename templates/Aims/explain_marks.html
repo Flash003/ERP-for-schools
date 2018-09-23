@@ -1,0 +1,34 @@
+{% extends 'Aims/profile.html' %}
+{% load staticfiles %}
+
+{% block upper %}
+{% if length == 0 %}
+no marks to show
+{% else %}
+<table class="table">
+  <thead>
+    <tr>
+      <td>Exam Name</td>
+      <td>Conducted On</td>
+      <td>Maximum Marks</td>
+      <td>Obtained Marks</td>
+    </tr>
+  </thead>
+    {% for m in marks %}
+    <tr>
+      <td>{{m.exam_name}}</td>
+      <td>{{m.exam_date}}</td>
+      <td><b>{{m.marks_obtained}}</b></td>
+      <td><b>{{m.total_marks}}</b></td>
+    </tr>
+
+    {% endfor %}
+</table>
+<p>
+
+</p>
+{% endif %}
+{% endblock %}
+{% block lower %}
+
+{% endblock %}

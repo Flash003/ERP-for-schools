@@ -1,0 +1,26 @@
+{% extends 'Aims/profile.html' %}
+{% load staticfiles %}
+
+
+{% block upper %}
+<div class="" style="text-align : center;">
+  <h1>Leave Request</h1>
+  <form method="post" action="{% url 'leave_request' %}" id='leave_form'>
+    {% csrf_token %}
+    Date : <input type="date" name="d"  value="Heading"/>
+    <br />
+<textarea name="reason" form="leave_form" rows="8" cols="80"></textarea>
+    <br />
+    <input type="submit"  value="Publish"/>
+  </form>
+
+  <h3>{{text}}</h3>
+</div>
+
+{% endblock %}
+
+
+{% block lower %}
+
+
+{% endblock %}

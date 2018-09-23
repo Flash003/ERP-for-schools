@@ -1,0 +1,97 @@
+{% extends 'Aims/generic_profile.html' %}
+{% load staticfiles %}
+
+{% block navbar %}
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="{% url 'index' %}">AIMS</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="{% url 'index' %}">Home</a></li>
+        <li><a href="{% url 'help' %}">Help</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="{{ student.profile_picture.url }}" width='20' height='20'> Account <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="{% url 'settings' %}">Settings</a></li>
+            <li><a href="{% url 'password_change' %}">Change Password</a></li>
+            <li><a href="{% url 'logout' %}">Logout</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+{% endblock %}<!--End of Navbar Block -->
+
+{% block features %}
+<ul class="nav nav-sidebar">
+  <li {% if request.path == '/Aims/profile/' %}class="active"{% endif %}><a href="{% url 'profile' %}">Profile <span class="sr-only">(current)</span></a></li>
+  <li {% if request.path == '/Aims/announcements/' %}class="active"{% endif %}><a href="{% url 'announcements' %}">Announcements</a></li>
+  <li {% if request.path == '/Aims/upcoming_events/' %}class="active"{% endif %}><a href="{% url 'upcoming_events' %}">Upcoming Events</a></li>
+  <li {% if request.path == '/Aims/articles/' %}class="active"{% endif %}><a href="{% url 'articles' %}">Articles</a></li>
+</ul>
+<ul class="nav nav-sidebar">
+  <li {% if request.path == '/Aims/studentmarks/' %}class="active"{% endif %}><a href="{% url 'studentmarks' %}">Marks</a></li>
+  <li {% if request.path == '/Aims/student_attendance/' %}class="active"{% endif %}><a href="{% url 'student_attendance' %}">Attendance</a></li>
+  <li {% if request.path == '/Aims/todays_topics/' %}class="active"{% endif %}><a href="{% url 'todays_topics' %}">Today's Topics</a></li>
+  <li {% if request.path == '/Aims/athenium/' %}class="active"{% endif %}><a href="{% url 'athenium' %}">Athenium</a></li>
+  <li {% if request.path == '/Aims/analytics/' %}class="active"{% endif %}><a href="{% url 'analytics' %}">Analytics</a></li>
+</ul>
+{% endblock %}
+
+{% block upper %}
+<h1 class="page-header">{{ student.user.first_name }}'s Profile</h1>
+<div class="row placeholders">
+  <div class="col-xs-6 col-sm-3 placeholder">
+    <img src="{{ student.profile_picture.url }}"  width="200" height="200"  alt="Profile Picture" style="border-radius: 2px;border: 2px solid #73AD21;padding: 2px; ">
+    <h2>{{ student.user.first_name }} {{ student.user.last_name }}</h2>
+    <span class="text-muted"><h4>Id : {{ student.user.username }}</h4></span>
+  </div>
+  <div class="col-xs-6 col-sm-5 placeholder">
+    <div style="text-align: left;">
+      <h4>Email : &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<b>{{ student.user.email }}</b></h4>
+      <h4>Contact : &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<b>{{ student.phone_number }}</b></h4>
+      <h4>Attendance : &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<b>0/0</b></h4>
+      <h4>Father's Name : &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<b>{{ student.father_name }}</b></h4>
+      <h4>Mother's Name : &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<b>{{ student.mother_name }}</b></h4>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block lower %}
+<h2 class="sub-header">My Schedule</h2>
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Time</th>
+        <th>Monday</th>
+        <th>Tuesday</th>
+        <th>Wednesday</th>
+        <th>Thursday</th>
+        <th>Friday</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for schedule in schedules %}
+      <tr>
+        <td>{{schedule.time}}</td>
+        <td>{{schedule.monday}}</td>
+        <td>{{schedule.tuesday}}</td>
+        <td>{{schedule.wednesday}}</td>
+        <td>{{schedule.thursday}}</td>
+        <td>{{schedule.friday}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

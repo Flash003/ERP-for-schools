@@ -1,0 +1,24 @@
+{% extends 'Aims/profile.html' %}
+{% load staticfiles %}
+
+{% block upper %}
+<h1>Subjects</h1>
+<table class="table">
+  <thead>
+    <tr>
+      <td>Subject</td>
+
+    </tr>
+  </thead>
+  {% for sub in subjects %}
+    <tr>
+      <td><a href="{% url 'explain_marks' %}?subject={{sub.name}}">{{sub.name}}</a></td>
+    </tr>
+  {% endfor %}
+</table>
+
+{% endblock %}
+
+{% block lower %}
+
+{% endblock %}

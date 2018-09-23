@@ -1,0 +1,25 @@
+{% extends 'Aims/profile.html' %}
+{% load staticfiles %}
+
+{% block upper %}
+<h1>Announcements</h1>
+<br />
+{% for announcement in announcements %}
+<div class="jumbotron" style="background-color:#b3ecff; padding: 20px;">
+  <h3>{{announcement.heading}}</h3>
+  <br />
+  <h4>{{announcement.content}}</h4>
+  <br />
+  <h5>Published on <b>{{announcement.date_and_time}}</b> by <b>{{announcement.author}}</b></h5>
+</div>
+
+{% endfor %}
+{% endblock %}
+
+
+{% block lower %}
+<p style="color : red;">
+  Showing the Latest Five Announcements To load and see all the announcements click Here
+</p>
+
+{% endblock %}

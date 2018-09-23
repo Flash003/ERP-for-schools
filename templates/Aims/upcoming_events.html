@@ -1,0 +1,20 @@
+{% extends 'Aims/profile.html' %}
+{% load staticfiles %}
+
+{% block upper %}
+
+  <h1>Upcoming Events List</h1>
+  {% for event in events %}
+  <div class="jumbotron" style="background-color:#ff9999; padding: 20px;">
+    <h3>Event Name : <b>{{event.name}}</b></h3>
+    <h4>Date and Time : <b>{{event.date}} , {{event.time}}</b></h4>
+    <p>{{event.description}}</p>
+    <br />
+
+  </div>
+
+  {% endfor %}
+{% endblock %}
+{% block lower %}
+
+{% endblock %}

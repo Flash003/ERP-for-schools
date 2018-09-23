@@ -1,0 +1,109 @@
+{% extends 'Aims/generic_profile.html' %}
+{% load staticfiles %}
+
+{% block features %}
+<style media="screen">
+table tr:nth-child(even){background-color: #f2f2f2;}
+table tr:hover {background-color: #ddd;}
+</style>
+{% if type == 'teacher' %}
+<ul class="nav nav-sidebar">
+  <li {% if request.path == '/Aims/profile/' %}class="active"{% endif %}><a href="{% url 'profile' %}">Profile <span class="sr-only">(current)</span></a></li>
+  <li {% if request.path == '/Aims/announcements/' %}class="active"{% endif %}><a href="{% url 'announcements' %}">Announcements</a></li>
+  <li {% if request.path == '/Aims/leave_request/' %}class="active"{% endif %}><a href="{% url 'leave_request' %}">Leave Request</a></li>
+  <li {% if request.path == '/Aims/upcoming_events/' %}class="active"{% endif %}><a href="{% url 'upcoming_events' %}">Upcoming Events</a></li>
+  <li {% if request.path == '/Aims/attendance/' %}class="active"{% endif %}><a href="{% url 'user_attendance' %}">My Attendance</a></li>
+</ul>
+<ul class="nav nav-sidebar">
+  <li {% if request.path == '/Aims/create_announcement/' %}class="active"{% endif %}><a href="{% url 'create_announcement' %}">Create Announcement</a></li>
+  <li {% if request.path == '/Aims/publish_attendance/' %}class="active"{% endif %}><a href="{% url 'publish_attendance' %}">Student Attendance Upload</a></li>
+  <li {% if request.path == '/Aims/marks_upload/' %}class="active"{% endif %}><a href="{% url 'marks_upload' %}">Student Marks Upload</a></li>
+  <li {% if request.path == '/Aims/athenium/' %}class="active"{% endif %}><a href="{% url 'athenium' %}">My Athenium</a></li>
+</ul>
+{% endif %}
+{% if type == 'student' %}
+<ul class="nav nav-sidebar">
+  <li {% if request.path == '/Aims/profile/' %}class="active"{% endif %}><a href="{% url 'profile' %}">Profile <span class="sr-only">(current)</span></a></li>
+  <li {% if request.path == '/Aims/announcements/' %}class="active"{% endif %}><a href="{% url 'announcements' %}">Announcements</a></li>
+  <li {% if request.path == '/Aims/upcoming_events/' %}class="active"{% endif %}><a href="{% url 'upcoming_events' %}">Upcoming Events</a></li>
+</ul>
+<ul class="nav nav-sidebar">
+  <li {% if request.path == '/Aims/studentmarks/' %}class="active"{% endif %}><a href="{% url 'studentmarks' %}">Marks</a></li>
+  <li {% if request.path == '/Aims/attendance/' %}class="active"{% endif %}><a href="{% url 'user_attendance' %}">My Attendance</a></li>
+  <li {% if request.path == '/Aims/todays_topics/' %}class="active"{% endif %}><a href="{% url 'todays_topics' %}">Today's Topics</a></li>
+  <li {% if request.path == '/Aims/feestatus/' %}class="active"{% endif %}><a href="{% url 'fee_status' %}">Fees Status</a></li>
+  <li {% if request.path == '/Aims/athenium/' %}class="active"{% endif %}><a href="{% url 'athenium' %}">My Athenium</a></li>
+  <li {% if request.path == '/Aims/analytics/' %}class="active"{% endif %}><a href="{% url 'analytics' %}">Analytics</a></li>
+</ul>
+{% endif %}
+{% endblock %}
+
+{% block upper %}
+<h2 class="page-header" style="text-align:center;">{{ USER.user.first_name }}'s Profile</h2>
+<div class="row placeholders">
+  <div class="col-xs-6 col-sm-3 placeholder">
+    <img src="{{ USER.profile_picture.url }}"  width="200" height="200"  alt="Profile Picture" style="border-radius: 2px;border: 2px solid #73AD21;padding: 2px; ">
+    <h2>{{ USER.user.first_name }} {{ USER.user.last_name }}</h2>
+    <span class="text-muted"><h4>Id : {{ USER.user.username }}</h4></span>
+    <h5>Hello</h5>
+  </div>
+  <div class="col-xs-6 col-sm-5 placeholder" style="text-align:center;">
+    <h4>My Details</h4>
+    <div style="text-align: left;">
+      <table style="width:100%; border: 3px solid black;" class="table">
+
+        <br />
+        <tr>
+          <th>Email</th>
+          <td>{{ USER.user.email }}</td>
+        </tr>
+        <tr>
+          <th>Contact</th>
+          <td>{{ USER.phone_number }}</td>
+        </tr>
+        <tr>
+          <th>Attendance</th>
+          <td>{{present_attendance}} out of {{total_attendance}}</td>
+        </tr>
+        <tr>
+          <th>Father's Name</th>
+          <td>{{ USER.father_name }}</td>
+        </tr>
+        <tr>
+          <th>Mother's Name</th>
+          <td>{{ USER.mother_name }}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block lower %}
+<h2 class="sub-header">My Schedule</h2>
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Time</th>
+        <th>Monday</th>
+        <th>Tuesday</th>
+        <th>Wednesday</th>
+        <th>Thursday</th>
+        <th>Friday</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for schedule in schedules %}
+      <tr>
+        <td>{{schedule.time}}</td>
+        <td>{{schedule.monday}}</td>
+        <td>{{schedule.tuesday}}</td>
+        <td>{{schedule.wednesday}}</td>
+        <td>{{schedule.thursday}}</td>
+        <td>{{schedule.friday}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

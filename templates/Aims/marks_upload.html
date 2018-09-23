@@ -1,0 +1,63 @@
+{% extends 'Aims/profile.html' %}
+{% load staticfiles %}
+
+{% block upper %}
+<h2>Marks Upload</h2>
+<h3>{{text}}</h3>
+<p style="color:red;">Instructions : Click on the student of your class and then fill in the form to upload marks</p>
+
+<form action="#" method="post">
+  {% csrf_token %}
+  Exam Name : <input type="text" name="exam-name" value="">
+  Class :
+  <select name="student-class">
+    <option value="pre-nursery">pre-nursery</option>
+    <option value="nursery">nursery</option>
+    <option value="kinder-garten">kinder-garten</option>
+    <option value="Grade - 1">Grade - 1</option>
+    <option value="Grade - 2">Grade - 2</option>
+    <option value="Grade - 3">Grade - 3</option>
+    <option value="Grade - 4">Grade - 4</option>
+    <option value="Grade - 5">Grade - 5</option>
+    <option value="Grade - 6">Grade - 6</option>
+    <option value="Grade - 7">Grade - 7</option>
+    <option value="Grade - 8">Grade - 8</option>
+    <option value="Grade - 9">Grade - 9</option>
+    <option value="Grade - X">Grade - X</option>
+    <option value="Grade - XI">Grade - XI</option>
+    <option value="Grade - XII">Grade - XII</option>
+  </select>
+  <br />
+  <br />
+  Subject :
+  <select name="student-subject">
+    {% for sub in subjects %}
+    <option value="{{sub.name}}">{{sub.name}}</option>
+    {% endfor %}
+  </select>
+  Maximum Marks : <input type="number" name="maximum-marks" value="">
+  <br />
+  <br />
+  Exam Date : <input type="date" name="exam-date" value="">
+  <br />
+  <br />
+  <br />
+  <br />
+  {% for s in students %}
+  <div style="display:flex; flex-direction: row; justify-content: left; align-items: center">
+    <h4>{{s.user.username}}</h4> :<input type="number" name="{{s.user.username}}-obtained-marks" value="">
+  </div>
+
+  {% endfor %}
+  <br />
+  <br />
+  <input type="submit" name="" value="Upload">
+</form>
+{% for a in students %}
+
+{% endfor %}
+{% endblock %}
+
+{% block lower %}
+
+{% endblock %}

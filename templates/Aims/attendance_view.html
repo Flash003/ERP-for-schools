@@ -1,0 +1,48 @@
+{% extends 'Aims/profile.html' %}
+{% load staticfiles %}
+
+{% block upper %}
+<h2>{{USER.user.first_name}}'s Attendance</h2>
+<br />
+<table class="table">
+  <thead>
+    <tr>
+      <td>
+        Date
+      </td>
+      <td>
+        Status
+      </td>
+      <td>
+        Marked by
+      </td>
+    </tr>
+    {% for att in attendance %}
+    <tr>
+      <td>
+        {{att.date}}
+      </td>
+      <td>
+        {{att.status}}
+      </td>
+      {% if type == 'student' %}
+      <td>
+        {{att.marked_by}}
+      </td>
+      {% endif %}
+      {% if type == 'teacher' %}
+      <td>
+        admin
+      </td>
+      {% endif %}
+    </tr>
+
+    {% endfor %}
+  </thead>
+
+
+</table>
+{% endblock %}
+{% block lower %}
+
+{% endblock %}

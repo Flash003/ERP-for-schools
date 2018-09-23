@@ -1,0 +1,22 @@
+{% extends 'Aims/profile.html' %}
+{% load staticfiles %}
+
+{% block upper %}
+<div class="" style="text-align:center;">
+  <h1>Create Announcement</h1>
+  <form method="post" action="{% url 'create_announcement' %}" id="announcement">
+    {% csrf_token %}
+    <input type="text" name="heading"  value="Heading"/>
+    <br />
+    <textarea name="content" form="announcement" rows="8" cols="80"></textarea>
+    <br />
+    <input type="submit"  value="Publish"/>
+  </form>
+
+  <h3>{{text}}</h3>
+</div>
+
+{% endblock %}
+
+{% block lower %}
+{% endblock %}

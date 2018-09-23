@@ -1,0 +1,25 @@
+{% extends 'Aims/profile.html' %}
+{% load staticfiles %}
+
+{% block upper %}
+<div class="">
+  <p>
+    <h2>You current Fee Status is </h2>
+    <div>
+      {% if USER.fee_status == True %}
+      <h2 style="color:red;">Pending</h2>
+      {% else%}
+      <h2 style="color:green;">Not Pending</h2>
+      {% endif %}
+    </div>
+
+  </p>
+</div>
+
+{% endblock %}
+
+
+{% block lower %}
+
+
+{% endblock %}
